@@ -23,7 +23,15 @@ class Business extends CI_Controller {
 	    $data["base_url"] = base_url();	    
 	    $data["title"] = "사업장 정보";	    
 	    $data["root"] = $_SERVER['DOCUMENT_ROOT']."/application/views";
-        $data["menu"] = "info";
+//        $data["menu"] = "info";
+        $data["parent_menu"] = 1;
+        $data["menu"] = 19;
+        
+        $this->load->model('Common/Menu_model','menu');
+        $menus = $this->menu->getMenus();
+        $data["menus"] = $menus;
+        
+        
 	    $this->load->model('Info/Business_model','business');
 	    $page = 0*25;
 	    $data["list"]= $this->business->getBusinessList(0);	    

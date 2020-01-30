@@ -123,6 +123,7 @@ function clearRegForm(){
 	$("#delete_btn").hide();
 }
 $("#submit_btn").on("click",function(){
+	if(checkform()){
 	$.ajax({
         url: '/info/customer/edit',
         type: 'post',
@@ -141,7 +142,87 @@ $("#submit_btn").on("click",function(){
             alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
         }
     });
+	}
 });
+
+function checkform(){
+	
+	var name = $("#name").val();
+	if(name==""){
+		alert("이름을 입력하세요.");
+		return false;
+	}
+	var code = $("#code").val();
+	if(code==""){
+		alert("고객코드를 입력하세요.");
+		return false;
+	}
+
+	if(!CheckCode(code)){
+		alert("고객코드가 중복됩니다.");
+		return false;
+	}
+	
+
+	
+	var representative = $("#representative").val();
+	if(representative==""){
+		alert("사업자 번호를 입력하세요.");
+		return false;
+	}
+	var business_number = $("#business_number").val();
+	if(business_number==""){
+		alert("사업자번호를 입력하세요.");
+		return false;
+	}
+	var tel = $("#tel").val();
+	if(tel==""){
+		alert("전화번호를 입력하세요.");
+		return false;
+	}
+	var email = $("#email").val();
+	if(email==""){
+		alert("이메일을 입력하세요.");
+		return false;
+	}
+	var business = $("#business").val();
+
+	if(business==""){
+		alert("업태를 입력하세요.");
+		return false;
+	}
+	
+	return true;
+}
+
+function CheckCode(code){
+	var result = false;
+	var send_data ={"code" : code};
+	$.ajax({
+        url: '/info/customer/chkcode',
+        type: 'post',
+        data: send_data,
+        async: false,
+        dataType: 'json',
+        beforeSend: function() {
+        	
+		},
+        complete: function() {
+			
+        },
+        success: function(json) {
+         	if(json["result"]){
+         		result = true;
+            }
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+
+    return result;
+}
+
 
 function modifycustomer(id){
 	clearRegForm();

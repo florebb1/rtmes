@@ -22,9 +22,16 @@ class Time extends CI_Controller {
     {
         $data["base_url"] = base_url();
         $data["title"] = "제조 시간";
-        $data["menu"] = "statistics";
+       // $data["menu"] = "statistics";
        $data["root"] = $_SERVER['DOCUMENT_ROOT']."/application/views";
         
+       $data["parent_menu"] = 9;
+       $data["menu"] = 43;
+       
+       $this->load->model('Common/Menu_model','menu');
+       $menus = $this->menu->getMenus();
+       $data["menus"] = $menus;
+       
         $this->load->view('statistics/time',$data);
     }
     

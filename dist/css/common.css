@@ -5,3 +5,7 @@ body{font-size: 14px;}
 .content-wrapper{background-color: #fff;}
 
 
+[class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:focus, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:hover {
+    background-color: #494e53;
+    color: #fff;
+}

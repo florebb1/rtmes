@@ -23,6 +23,16 @@ class Home extends CI_Controller {
 	    $data["base_url"] = base_url();	    
 	    $data["title"] = "덴탈랩";
         $data["menu"] = "home";
+        
+        $data["parent_menu"] = "";
+        $data["menu"] = "";
+        
+        $this->load->model('Common/Menu_model','menu');
+        $menus = $this->menu->getMenus();
+        $data["menus"] = $menus;
+        
+        redirect('/monitoring/work');
+        
 	    $this->load->view('index',$data);
 	}
 }

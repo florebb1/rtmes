@@ -23,6 +23,16 @@ class Purchase extends CI_Controller {
 	    $data["base_url"] = base_url();	    
 	    $data["title"] = "입고 관리";	    
 	    $data["root"] = $_SERVER['DOCUMENT_ROOT']."/application/views";
+	    
+	    $data["parent_menu"] = 2;
+	    $data["menu"] = 21;
+	    
+	    $this->load->model('Common/Menu_model','menu');
+	    $menus = $this->menu->getMenus();
+	    $data["menus"] = $menus;
+	    
+	    
+	    
         $data["menu"] = "material";
 	    $this->load->view('material/purchase',$data);
 	}

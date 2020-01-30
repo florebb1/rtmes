@@ -23,7 +23,15 @@ class Material extends CI_Controller {
 	    $data["base_url"] = base_url();	    
 	    $data["title"] = "자재 등록";	    
 	    $data["root"] = $_SERVER['DOCUMENT_ROOT']."/application/views";
-        $data["menu"] = "material";
+        //$data["menu"] = "material";
+        
+        $data["parent_menu"] = 2;
+        $data["menu"] = 20;
+        
+        $this->load->model('Common/Menu_model','menu');
+        $menus = $this->menu->getMenus();
+        $data["menus"] = $menus;
+        
 	    $this->load->view('material/material',$data);
 	}
 

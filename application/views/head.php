@@ -10,6 +10,12 @@
   <link rel="stylesheet" href="<?php echo $base_url;?>plugins/fontawesome-free/css/all.min.css">
   <!-- IonIcons -->
   <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- iCheck for checkboxes and radio inputs -->
+  <link rel="stylesheet" href="<?php echo $base_url;?>plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Bootstrap Color Picker -->
+  <link rel="stylesheet" href="<?php echo $base_url;?>plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
+  <!-- Tempusdominus Bbootstrap 4 -->
+  <link rel="stylesheet" href="<?php echo $base_url;?>plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo $base_url;?>dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
@@ -92,7 +98,7 @@ to get the desired effect
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-           <?php /*for($i=0; $i<count($menus); $i++){?>
+           <?php for($i=0; $i<count($menus); $i++){?>
            <li class="nav-item has-treeview <?if($menus[$i]["menu_id"] == $parent_menu)echo "menu-open active "?>">
            		 <a href="#" class="nav-link">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -103,8 +109,8 @@ to get the desired effect
                 <?php if(count($menus[$i]["sub"]) > 0){?>
                 <ul class="nav nav-treeview ">
                 <?php for($j=0; $j<count($menus[$i]["sub"]); $j++){?>
-                <li class="nav-item <?if($menus[$i]["sub"][$j]["menu_id"] == $menu) echo "active"?>">
-                    <a href="<?php echo $menus[$i]["sub"][$j]["url"]; ?>" class="nav-link">
+                <li class="nav-item ">
+                    <a href="<?php echo $menus[$i]["sub"][$j]["url"]; ?>" class="nav-link <?if($menus[$i]["sub"][$j]["menu_id"] == $menu) echo "active"?>">
                       <i class="far fa-circle nav-icon"></i>
                       <p><?php echo $menus[$i]["sub"][$j]["name"];?></p>
                     </a>
@@ -113,7 +119,8 @@ to get the desired effect
                 </ul>
                 <?php }?>
            </li>
-           <?php }*/?>    
+           <?php }?>   
+           <?php /*?> 
           <li class="nav-item has-treeview <?if($menu == "info")echo "menu-open"?>">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -433,7 +440,7 @@ to get the desired effect
               </li>
             </ul>
           </li>
-          
+          <?php */?>  
           
         </ul>
       </nav>

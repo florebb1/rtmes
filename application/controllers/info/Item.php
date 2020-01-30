@@ -22,8 +22,15 @@ class Item extends CI_Controller {
 	{   
 	    $data["base_url"] = base_url();	    
 	    $data["title"] = "품목 정보";
-        $data["menu"] = "info";
-	    $data["root"] = $_SERVER['DOCUMENT_ROOT']."/application/views";	   
+//        $data["menu"] = "info";
+	    $data["root"] = $_SERVER['DOCUMENT_ROOT']."/application/views";	 
+	    $data["parent_menu"] = 1;
+	    $data["menu"] = 12;
+	    
+	    $this->load->model('Common/Menu_model','menu');
+	    $menus = $this->menu->getMenus();
+	    $data["menus"] = $menus;
+	    
 	    $this->load->model('Info/Item_model','item');
 	    $data["categorys"]= $this->item->getItemCategoryList();	
 	    $data["purchases"]= $this->item->getItemPurchaseList();

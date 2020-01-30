@@ -17,7 +17,7 @@ var areaChartData = {
 	      labels  : ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
 	      datasets: [
 	        {
-	          label               : '2018년 제조불량률',
+	          label               : '<?php echo $current_year;?>년 제조불량률',
 	          backgroundColor     : 'rgba(60,141,188,0.9)',
 	          borderColor         : 'rgba(60,141,188,0.8)',
 	          pointRadius          : false,
@@ -25,10 +25,19 @@ var areaChartData = {
 	          pointStrokeColor    : 'rgba(60,141,188,1)',
 	          pointHighlightFill  : '#fff',
 	          pointHighlightStroke: 'rgba(60,141,188,1)',
-	          data                : [28, 48, 40, 19, 86, 27, 90,10,20,33,15,2]
+//	          data                : [28, 48, 40, 19, 86, 27, 90,10,20,33,15,2]
+	          data                : [<?php for($i=0; $i<count($list); $i++){ 
+	              if($i==count($list)-1){
+	                  echo $list[$i][$current_year];
+	              }else{
+	                  echo $list[$i][$current_year].",";
+	              }
+	               
+	          }?>
+	          ]
 	        },
 	        {
-	          label               : '2019년 제조불량률',
+	          label               : '<?php echo $prev_year;?>년 제조불량률',
 	          backgroundColor     : 'rgba(210, 214, 222, 1)',
 	          borderColor         : 'rgba(210, 214, 222, 1)',
 	          pointRadius         : false,
@@ -36,7 +45,15 @@ var areaChartData = {
 	          pointStrokeColor    : '#c1c7d1',
 	          pointHighlightFill  : '#fff',
 	          pointHighlightStroke: 'rgba(220,220,220,1)',
-	          data                : [65, 59, 80, 81, 56, 55, 40,5,14,23,60,10]
+//	          data                : [65, 59, 80, 81, 56, 55, 40,5,14,23,60,10]
+	          data                : [<?php for($i=0; $i<count($list); $i++){ 
+	              if($i==count($list)-1){
+	                  echo $list[$i][$prev_year];
+	              }else{
+	                  echo $list[$i][$prev_year].",";
+	              }
+	               
+	          }?>]
 	        },
 	      ]
 	    }

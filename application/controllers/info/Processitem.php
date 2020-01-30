@@ -22,8 +22,16 @@ class Processitem extends CI_Controller {
 	{ 
 	    $data["base_url"] = base_url();	    
 	    $data["title"] = "품목별 공정 정보";
-        $data["menu"] = "info";
+//        $data["menu"] = "info";
 	    $data["root"] = $_SERVER['DOCUMENT_ROOT']."/application/views";	    
+	    
+	    $data["parent_menu"] = 1;
+	    $data["menu"] = 14;
+	    
+	    $this->load->model('Common/Menu_model','menu');
+	    $menus = $this->menu->getMenus();
+	    $data["menus"] = $menus;
+	    
 	    $this->load->model('Info/Process_model','process');
 	    $data["process"]= $this->process->getProcessList2();
 	    $data["item"]= $this->process->getItemList();

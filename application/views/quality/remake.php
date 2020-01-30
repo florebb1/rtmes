@@ -4,7 +4,7 @@
     <!--    <div class="card-header"></div>-->
     <div class="card-body table-responsive">
         <div class="mb-3">
-            <input type="text" id="startDate" name="" class="datepicker" style="padding: .375rem .75rem;" placeholder="선택" readonly> ~ <input type="text" id="endDate" name="" class="datepicker" style="padding: .375rem .75rem;" placeholder="선택" readonly>
+            <input type="text" id="startDate" name="st_date" class="datepicker" style="padding: .375rem .75rem;" placeholder="선택" readonly value="<?php echo $st_date;?>"> ~ <input type="text" id="endDate" name="ed_date" class="datepicker" style="padding: .375rem .75rem;" placeholder="선택" readonly value="<?php echo $ed_date;?>">
             <div class="d-inline-block mx-3">
                 <button class="btn btn-outline-primary dateMenu" data-text="1">1일</button>
                 <button class="btn btn-outline-primary dateMenu" data-text="7">7일</button>
@@ -18,37 +18,30 @@
                     <th class="text-center">번호</th>
                     <th class="text-center">의뢰번호</th>
                     <th class="text-center">거래처</th>
-                    <th class="text-center">품번</th>
-                    <th class="text-center">품목</th>
                     <th class="text-center">납기일</th>
-                    <th class="text-center">의뢰형태</th>
-                    <th class="text-center">접수일(yyyy.mm.dd hh.mm)</th>
-                    <th class="text-center">완료 일시(yyyy.mm.dd hh.mm)</th>
+                    <th class="text-center">접수일(yyyy-mm-dd hh:mm:ss)</th>
+                    <th class="text-center">완료일(yyyy-mm-dd hh:mm:ss)</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td class="text-center">1</td>
-                    <td class="text-center">2010A12B1</td>
-                    <td class="text-center">가 치과</td>
-                    <td class="text-center"><a class="text-primary">aaaA12B1</a></td>
-                    <td class="text-center">인레이</td>
-                    <td class="text-center">2019.11.15</td>
-                    <td class="text-center">리메이크</td>
-                    <td class="text-center">2019.11.10 10:30</td>
-                    <td class="text-center">2019.11.12 12:10</td>
-                </tr>
-                <tr>
-                    <td class="text-center">2</td>
-                    <td class="text-center">2010A12C12</td>
-                    <td class="text-center">나 치과</td>
-                    <td class="text-center"><a class="text-primary">aaaA12C12</a></td>
-                    <td class="text-center">인레이</td>
-                    <td class="text-center">2019.11.15</td>
-                    <td class="text-center">리메이크</td>
-                    <td class="text-center">2019.11.10 10:30</td>
-                    <td class="text-center">2019.11.12 12:10</td>
-                </tr>
+            <?php if(count($list)> 0){?>
+            <?php for($i=0; $i<count($list); $i++){?>
+            <tr>
+                <td class="text-center"><?php echo count($list)-$i;?></td>
+                <td class="text-center"><?php echo $list[$i]["reception_number"];?></td>
+                <td class="text-center"><?php echo $list[$i]["customer_name"];?></td>
+                <td class="text-center"><?php echo $list[$i]["delivery_date"];?></td>
+                <td class="text-center"><?php echo $list[$i]["reception_date"];?></td>
+                <td class="text-center"><?php echo $list[$i]["complete_date"];?></td>
+            </tr>
+           
+            <?php }?>
+            <?php }else{?>
+             <tr>
+                <td class="text-center" colspan="6">리메이크 데이터가 없습니다.</td>
+               
+            </tr>
+            <?php }?>   
             </tbody>
         </table>
     </div>
@@ -63,8 +56,8 @@
                 cancelLabel: 'Clear'
             }
         }, function (start, end) {
-            $("#startDate").val(start.format('MM/DD/YYYY'));
-            $("#endDate").val(end.format('MM/DD/YYYY'));
+            $("#startDate").val(start.format('YYYY-MM-DD'));
+            $("#endDate").val(end.format('YYYY-MM-DD'));
             $(".dateMenu").removeClass('active');
         });
 
@@ -77,15 +70,15 @@
             var menuDate = $(this).data('text');
             var today = new Date();
             today = moment(today).format('YYYY-MM-DD');
-            $("#endDate").val(moment(today).format('MM/DD/YYYY'));
+            $("#endDate").val(moment(today).format('YYYY-MM-DD'));
             if(menuDate == "1") {
-                $("#startDate").val(moment(today).format('MM/DD/YYYY'));
+                $("#startDate").val(moment(today).format('YYYY-MM-DD'));
             }else if(menuDate == "7") {
                 var newDate = dateAddDel(today, -7, 'd');
-                $("#startDate").val(moment(newDate).format('MM/DD/YYYY'));
+                $("#startDate").val(moment(newDate).format('YYYY-MM-DD'));
             } else if (menuDate == "30") {
                 var newDate = dateAddDel(today, -1, 'm');
-                $("#startDate").val(moment(newDate).format('MM/DD/YYYY'));
+                $("#startDate").val(moment(newDate).format('YYYY-MM-DD'));
             }
         });
     });
@@ -108,7 +101,9 @@
             return false;
         }
 
-        // 리메이크 관리 검색 api 로직...
+
+		location.href="/quality/remake?st_date="+start+"&ed_date="+end;	
+        // 클레임 관리 검색 api 로직...
     }
 </script>
 <?php include_once $root.'/footer.php';?>

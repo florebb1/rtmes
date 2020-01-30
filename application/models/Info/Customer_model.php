@@ -21,7 +21,7 @@ class Customer_model extends CI_Model {
     
     public function insertCustomer($regr){
         $sql = "insert into sf_customer set name = '".$regr["name"]."',
-                code = '".$regr["code"]."', 
+                code = '".strtoupper($regr["code"])."', 
                 representative = '".$regr["representative"]."', 
                 business_number = '".$regr["business_number"]."', 
                 tel = '".$regr["tel"]."', 
@@ -37,7 +37,7 @@ class Customer_model extends CI_Model {
     
     public function updateCustomer($regr){
         $sql = "update sf_customer set name = '".$regr["name"]."',
-                code = '".$regr["code"]."',
+                code = '".strtoupper($regr["code"])."',
                 representative = '".$regr["representative"]."',
                 business_number = '".$regr["business_number"]."',
                 tel = '".$regr["tel"]."',
@@ -57,5 +57,10 @@ class Customer_model extends CI_Model {
         
     }
     
-    
+    public function ChkCode($code){
+        $sql = "select count(*) as cnt from sf_customer where code = '".$code."'";
+        $query = $this->db->query($sql);
+        $info = $query->row_array();
+        return $info["cnt"];
+    }
 }

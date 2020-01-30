@@ -22,8 +22,15 @@ class Plan extends CI_Controller {
     {
         $data["base_url"] = base_url();
         $data["title"] = "생산 계획";
-        $data["menu"] = "production";
+ //       $data["menu"] = "production";
         $data["root"] = $_SERVER['DOCUMENT_ROOT']."/application/views";
+        
+        $data["parent_menu"] = 6;
+        $data["menu"] = 33;
+        
+        $this->load->model('Common/Menu_model','menu');
+        $menus = $this->menu->getMenus();
+        $data["menus"] = $menus;
         
         $this->load->view('production/plan',$data);
     }

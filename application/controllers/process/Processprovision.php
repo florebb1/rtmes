@@ -22,8 +22,16 @@ class Processprovision extends CI_Controller {
 	{ 
 	    $data["base_url"] = base_url();	    
 	    $data["title"] = "공정 제공 관리";
-        $data["menu"] = "process";
+//         $data["menu"] = "process";
 	    $data["root"] = $_SERVER['DOCUMENT_ROOT']."/application/views";	    
+	    
+	    $data["parent_menu"] = 4;
+	    $data["menu"] = 30;
+	    
+	    $this->load->model('Common/Menu_model','menu');
+	    $menus = $this->menu->getMenus();
+	    $data["menus"] = $menus;
+	    
 	    $this->load->model('Info/Process_model','process');
 	    $data["process"]= $this->process->getProcessList2();
 	    

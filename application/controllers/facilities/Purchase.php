@@ -23,7 +23,13 @@ class Purchase extends CI_Controller {
 	    $data["base_url"] = base_url();	    
 	    $data["title"] = "설비 작업 현황";
 	    $data["root"] = $_SERVER['DOCUMENT_ROOT']."/application/views";
-        $data["menu"] = "facilities";
+//        $data["menu"] = "facilities";
+	    $data["parent_menu"] = 3;
+	    $data["menu"] = 25;
+	    
+	    $this->load->model('Common/Menu_model','menu');
+	    $menus = $this->menu->getMenus();
+	    $data["menus"] = $menus;
 	    $this->load->view('facilities/purchase',$data);
 	}
 }

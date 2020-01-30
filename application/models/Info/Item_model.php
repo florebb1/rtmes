@@ -7,7 +7,7 @@ class Item_model extends CI_Model {
     }
     
     public function getItemCategoryList(){
-        $sql = "select * from sf_item_category order by item_category_id asc";
+        $sql = "select * from sf_item_category order by ord asc";
         $query = $this->db->query($sql);
         return $query->result_array();
     }

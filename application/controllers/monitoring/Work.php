@@ -22,8 +22,15 @@ class Work extends CI_Controller {
     {
         $data["base_url"] = base_url();
         $data["title"] = "실시간 작업 현황";
-        $data["menu"] = "monitoring";               
+    //    $data["menu"] = "monitoring";               
         $data["root"] = $_SERVER['DOCUMENT_ROOT']."/application/views";
+        
+        $data["parent_menu"] = 8;
+        $data["menu"] = 40;
+        
+        $this->load->model('Common/Menu_model','menu');
+        $menus = $this->menu->getMenus();
+        $data["menus"] = $menus;
         
         $this->load->view('monitoring/work',$data);
     }

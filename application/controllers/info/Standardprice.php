@@ -22,8 +22,16 @@ class Standardprice extends CI_Controller {
 	{   
 	    $data["base_url"] = base_url();	    
 	    $data["title"] = "표준 단가 정보";
-        $data["menu"] = "info";
+//        $data["menu"] = "info";
 	    $data["root"] = $_SERVER['DOCUMENT_ROOT']."/application/views";	   
+	    
+	    $data["parent_menu"] = 1;
+	    $data["menu"] = 16;
+	    
+	    $this->load->model('Common/Menu_model','menu');
+	    $menus = $this->menu->getMenus();
+	    $data["menus"] = $menus;
+	    
 	    
 	    $this->load->model('Info/Standard_model','standard');
 	    $data["customer"] = $this->standard->getCustmerList();

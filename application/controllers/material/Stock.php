@@ -23,7 +23,15 @@ class Stock extends CI_Controller {
 	    $data["base_url"] = base_url();	    
 	    $data["title"] = "재고 현황";	    
 	    $data["root"] = $_SERVER['DOCUMENT_ROOT']."/application/views";
-        $data["menu"] = "material";
+  //      $data["menu"] = "material";
+  
+	    $data["parent_menu"] = 2;
+	    $data["menu"] = 23;
+	    
+	    $this->load->model('Common/Menu_model','menu');
+	    $menus = $this->menu->getMenus();
+	    $data["menus"] = $menus;
+	    
 	    $this->load->view('material/stock',$data);
 	}
 

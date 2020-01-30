@@ -22,9 +22,34 @@ class Remake extends CI_Controller {
     {
         $data["base_url"] = base_url();
         $data["title"] = "리메이크 관리";
-        $data["menu"] = "quality";
+   //     $data["menu"] = "quality";
         $data["root"] = $_SERVER['DOCUMENT_ROOT']."/application/views";
-
+        
+        $data["parent_menu"] = 7;
+        $data["menu"] = 39;
+        
+        $this->load->model('Common/Menu_model','menu');
+        $menus = $this->menu->getMenus();
+        $data["menus"] = $menus;
+        
+        $this->load->model('Quality/Remake_model','remake');
+        
+        $st_date = date("Y-m-d",time());
+        $ed_date = date("Y-m-d",time());
+        if($this->input->get("st_date")){
+            $st_date = $this->input->get("st_date");
+        }
+        
+        if($this->input->get("ed_date")){
+            $ed_date = $this->input->get("ed_date");
+        }
+        
+        $data["st_date"] = $st_date;
+        $data["ed_date"] = $ed_date;
+        $data["list"]= $this->remake->getRemakeList($st_date,$ed_date);
+        
+        
+        
         $this->load->view('quality/remake',$data);
     }
 

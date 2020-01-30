@@ -22,8 +22,16 @@ class Processdefect extends CI_Controller {
 	{   $this->load->helper('url');
 	    $data["base_url"] = base_url();	    
 	    $data["title"] = "공정 불량 정보";
-        $data["menu"] = "info";
-	    $data["root"] = $_SERVER['DOCUMENT_ROOT']."/application/views";	    
+//        $data["menu"] = "info";
+	    $data["root"] = $_SERVER['DOCUMENT_ROOT']."/application/views";	   
+	    
+	    $data["parent_menu"] = 1;
+	    $data["menu"] = 15;
+	    
+	    $this->load->model('Common/Menu_model','menu');
+	    $menus = $this->menu->getMenus();
+	    $data["menus"] = $menus;
+	    
 	    $this->load->view('info/processdefect',$data);
 	}
 }

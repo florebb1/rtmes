@@ -22,8 +22,15 @@ class Sales extends CI_Controller {
     {
         $data["base_url"] = base_url();
         $data["title"] = "매출현황";
-        $data["menu"] = "statistics";
-     $data["root"] = $_SERVER['DOCUMENT_ROOT']."/application/views";
+       // $data["menu"] = "statistics";
+        $data["root"] = $_SERVER['DOCUMENT_ROOT']."/application/views";
+        
+        $data["parent_menu"] = 9;
+        $data["menu"] = 45;
+        
+        $this->load->model('Common/Menu_model','menu');
+        $menus = $this->menu->getMenus();
+        $data["menus"] = $menus;
         
         $this->load->view('statistics/sales',$data);
     }

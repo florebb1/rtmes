@@ -21,9 +21,16 @@ class Process extends CI_Controller {
     public function index()
     {
         $data["base_url"] = base_url();
-        $data["title"] = "실시간 공정 샌산 등록";
-        $data["menu"] = "monitoring";
+        $data["title"] = "실시간 공정 생산 등록";
+    //    $data["menu"] = "monitoring";
         $data["root"] = $_SERVER['DOCUMENT_ROOT']."/application/views";
+        
+        $data["parent_menu"] = 8;
+        $data["menu"] = 41;
+        
+        $this->load->model('Common/Menu_model','menu');
+        $menus = $this->menu->getMenus();
+        $data["menus"] = $menus;
         
         $this->load->view('monitoring/process',$data);
     }

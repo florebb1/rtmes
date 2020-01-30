@@ -22,8 +22,16 @@ class Process extends CI_Controller {
 	{   $this->load->helper('url');
 	    $data["base_url"] = base_url();	    
 	    $data["title"] = "공정정보";
-        $data["menu"] = "info";
+//        $data["menu"] = "info";
 	    $data["root"] = $_SERVER['DOCUMENT_ROOT']."/application/views";	   
+	    
+	    $data["parent_menu"] = 1;
+	    $data["menu"] = 13;
+	    
+	    $this->load->model('Common/Menu_model','menu');
+	    $menus = $this->menu->getMenus();
+	    $data["menus"] = $menus;
+	    
 	    
 	    $this->load->model('Info/Process_model','process');
 	    $page = 0*25;

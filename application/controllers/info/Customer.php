@@ -23,13 +23,13 @@ class Customer extends CI_Controller {
 	    $data["base_url"] = base_url();	    
 	    $data["title"] = "고객사 정보";	    
 	    $data["root"] = $_SERVER['DOCUMENT_ROOT']."/application/views";
+//	    $data["menu"] = "info";
         $data["parent_menu"] = 1;
         $data["menu"] = 10;
-        $data["menu"] = "info";
-	/*     $this->load->model('common/Menu_model','menu');
-	    $menus = $this->menu->getMenus();	   
-	    print_r($menus);
-	    $data["menus"] = $menus; */
+        
+	    $this->load->model('Common/Menu_model','menu');
+	    $menus = $this->menu->getMenus();	
+	    $data["menus"] = $menus;
 	    
 	    
 	    $this->load->model('Info/Customer_model','customer');
@@ -76,5 +76,24 @@ class Customer extends CI_Controller {
 	    $json["result"] = $result;
 	    echo json_encode($json);
 	    exit;
+	}
+	
+	public function chkcode(){
+	    $this->load->model('Info/Customer_model','customer');
+	    $code="";
+	    $result =false;
+	    if($this->input->post("code")){
+	       $code = $this->input->post("code");
+	       $cnt = $this->customer->ChkCode($code);
+	       if($cnt == 0){
+	           $result =true;
+	       }
+	    }
+	    
+	    
+	    $json["result"] = $result;
+	    echo json_encode($json);
+	    exit;
+	    
 	}
 }

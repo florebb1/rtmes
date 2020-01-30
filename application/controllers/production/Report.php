@@ -22,9 +22,14 @@ class Report extends CI_Controller {
     {
         $data["base_url"] = base_url();
         $data["title"] = "생산 일보 관리";
-        $data["menu"] = "production";       	            
+    //    $data["menu"] = "production";       	            
         $data["root"] = $_SERVER['DOCUMENT_ROOT']."/application/views";
-
+        $data["parent_menu"] = 6;
+        $data["menu"] = 36;
+        
+        $this->load->model('Common/Menu_model','menu');
+        $menus = $this->menu->getMenus();
+        $data["menus"] = $menus;
         $this->load->view('production/report',$data);
     }
 

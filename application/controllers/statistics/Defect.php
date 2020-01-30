@@ -22,8 +22,26 @@ class Defect extends CI_Controller {
 	{   
 	    $data["base_url"] = base_url();	    
 	    $data["title"] = "제조 불량률";	    
-        $data["menu"] = "statistics";
+   //     $data["menu"] = "statistics";
 	    $data["root"] = $_SERVER['DOCUMENT_ROOT']."/application/views";
+	    
+	    $data["parent_menu"] = 9;
+	    $data["menu"] = 42;
+	    
+	    $this->load->model('Common/Menu_model','menu');
+	    $menus = $this->menu->getMenus();
+	    $data["menus"] = $menus;
+	    
+	    $this->load->model('Statistics/Statistics_model','statistics');
+	    
+	    $current_year = date("Y",time());
+	    $prev_year = date("Y", strtotime($current_year." -12 month"));
+	    
+	    $data["current_year"] = $current_year;
+	    $data["prev_year"] = $prev_year;
+	    
+	    $data["list"] = $this->statistics->getDefectList($current_year,$prev_year);
+	    
 	    
 	    $this->load->view('statistics/defect',$data);
 	}
